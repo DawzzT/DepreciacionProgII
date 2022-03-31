@@ -25,7 +25,10 @@ namespace Infraestructure.Repository
         {
             get => File.Open($"{fileName}.hd", FileMode.OpenOrCreate, FileAccess.ReadWrite);
         }
-
+        public Stream TempStream
+        {
+            get => File.Open($"Temp.hd", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+        }
         public Stream DataStream
         {
             get => File.Open($"{fileName}.dat", FileMode.OpenOrCreate, FileAccess.ReadWrite);
@@ -122,6 +125,8 @@ namespace Infraestructure.Repository
 
         public T Get<T>(int id)
         {
+            long posh = 0;
+            int posindex = 0;
             try
             {
                 T newValue = (T)Activator.CreateInstance(typeof(T));
@@ -147,7 +152,22 @@ namespace Infraestructure.Repository
                     }
 
                     PropertyInfo[] properties = newValue.GetType().GetProperties();
-                    long posh = 8 + (id - 1) * 4;
+                    //////////////////////
+                    for (int i = 0; i < n; i++)
+                    {
+                            posh = 8 + i * 4;
+                            brHeader.BaseStream.Seek(posh, SeekOrigin.Begin);
+                            if (id == brHeader.ReadInt32())
+                            {
+                                posindex = (int)posh;
+
+                            }
+
+                    }
+                    
+
+
+                    posh = posindex;
                     //TODO Add Binary search to find the id
                     brHeader.BaseStream.Seek(posh, SeekOrigin.Begin);
                     int index = brHeader.ReadInt32();
@@ -258,7 +278,7 @@ namespace Infraestructure.Repository
             }
             
         }
-
+        
         public List<T> Find<T>(Expression<Func<T, bool>> where)
         {
             List<T> listT = new List<T>();
@@ -386,48 +406,71 @@ namespace Infraestructure.Repository
 
         public void Delete(int id)
         {
-            long pos = GetPosition(id);
-            using (BinaryWriter bwHeader = new BinaryWriter(HeaderStream))
-            {
-
-                bwHeader.BaseStream.Seek(pos, SeekOrigin.Begin);
-                bwHeader.Write(0);
-
-            }
-        }
-        public int GetPosition(int id)
-        {
-
-            int index = 0;
-            int n = 0;
-
+            int n = 0, k = 0;
+            int posindex = 0;
             using (BinaryReader brHeader = new BinaryReader(HeaderStream))
             {
                 if (brHeader.BaseStream.Length > 0)
                 {
                     brHeader.BaseStream.Seek(0, SeekOrigin.Begin);
                     n = brHeader.ReadInt32();
+                    k = brHeader.ReadInt32();
                 }
-            }
-
-            for (int i = 0; i < n; i++)
-            {
-
-                using (BinaryReader brHeader = new BinaryReader(HeaderStream))
+                if (n == 0)
                 {
-                    long posh = 8 + i * 4;
+                    return;
+                }
+
+                if (id <= 0 || id > k)
+                {
+                    return;
+                }
+
+                for (int i = 0; i < n; i++)
+                {
+                    int posh = 8 + i * 4;
                     brHeader.BaseStream.Seek(posh, SeekOrigin.Begin);
                     if (id == brHeader.ReadInt32())
                     {
-                        return index = (int)posh;
+                        posindex = (int)posh;
 
                     }
 
                 }
 
-
             }
-            return index;
+            using (BinaryWriter bwHeader = new BinaryWriter(HeaderStream))
+            {
+                bwHeader.BaseStream.Seek(posindex, SeekOrigin.Begin);
+                bwHeader.Write(0);
+            }
+            using (BinaryWriter bwTemp = new BinaryWriter(TempStream))
+            {
+                using (BinaryReader brHeader = new BinaryReader(HeaderStream))
+                {
+                    for (int i = 0, j = 0; i < n; i++, j++)
+                    {
+                        long pos = 8 + i * 4;
+                        brHeader.BaseStream.Seek(pos, SeekOrigin.Begin);
+                        if (brHeader.ReadInt32() == 0)
+                        {
+                            j = j - 1;
+                            continue;
+                        }
+                        long post = 8 + j * 4;
+                        bwTemp.BaseStream.Seek(post, SeekOrigin.Begin);
+                        brHeader.BaseStream.Seek(pos, SeekOrigin.Begin);
+                        bwTemp.Write(brHeader.ReadInt32());
+                    }
+                }
+                bwTemp.BaseStream.Seek(0, SeekOrigin.Begin);
+                bwTemp.Write(n - 1);
+                bwTemp.Write(k);
+            }
+            File.Copy("Temp.hd", $"{fileName}.hd", true);
+            
+            File.Delete("Temp.hd");
         }
+     
     }
 }

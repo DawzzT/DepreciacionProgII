@@ -48,15 +48,15 @@ namespace Infraestructure.Repository
 
         public List<Activo> Read()
         {
-
-            try
-            {
-                return context.GetAll<Activo>();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return context.GetAll<Activo>();
+            //try
+            //{
+                
+            //}
+            //catch (Exception)
+            //{
+            //    throw;
+            //}
         }
 
         public void Update(Activo activo)
