@@ -51,7 +51,17 @@ namespace Infraestructure.Repository
             }
         }
 
+        public void AsignarActivo(Activo a, Empleado e)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Delete(Activo t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Activo> GetActivoByEmpleado(Empleado e)
         {
             throw new NotImplementedException();
         }

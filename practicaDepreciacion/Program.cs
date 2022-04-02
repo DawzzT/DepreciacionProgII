@@ -21,15 +21,18 @@ namespace practicaDepreciacion
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-           var builder = new ContainerBuilder();
+
+            var builder2 = new ContainerBuilder();
+            builder2.RegisterType<BinaryEmpleadoRepository>().As<IEmpleadoModel>();
+            builder2.RegisterType<EmpleadoServices>().As<IEmpleadoServices>();
+            var container2 = builder2.Build();
+
+            var builder = new ContainerBuilder();
             builder.RegisterType<BinaryActivoRepository>().As<IActivoModel>();
             builder.RegisterType<ActivoServices>().As<IActivoServices>();
             var container = builder.Build();
 
-            var builder2 = new ContainerBuilder();
-            builder.RegisterType<BinaryEmpleadoRepository>().As<IEmpleadoModel>();
-            builder.RegisterType<EmpleadoServices>().As<IEmpleadoServices>();
-            var container2 = builder.Build();
+            
             Application.Run(new Form1(container.Resolve<IActivoServices>(), container2.Resolve<IEmpleadoServices>()));
         }
     }

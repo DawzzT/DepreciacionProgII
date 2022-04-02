@@ -8,7 +8,7 @@ namespace Domain.Enum
 {
     public enum EstadoActivo
     {
-        MalEstado,
+        Mal_Estado,
         Reparacion,
         Asignado,
         Disponible

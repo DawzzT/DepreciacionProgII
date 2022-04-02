@@ -1,5 +1,6 @@
 ﻿using AppCore.IServices;
 using Domain.Entities;
+using Domain.Enum;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,6 +38,7 @@ namespace practicaDepreciacion
                 txtValor.Text = a.Valor.ToString();
                 txtValorR.Text = a.ValorResidual.ToString();
                 txtVidaU.Text = a.VidaUtil.ToString();
+                txtDescripcion.Text = a.Descripcion;
             }
         }
         private void FrmActivo_Load(object sender, EventArgs e)
@@ -54,14 +56,19 @@ namespace practicaDepreciacion
             }
             else
             {
-
+                EstadoActivo estAct = (EstadoActivo)Enum.GetValues(typeof(EstadoActivo)).
+                   GetValue(cmbEstado.SelectedIndex);
                 Activo activo = new Activo()
                 {
                     Nombre = txtNombre.Text,
                     Valor = double.Parse(txtValor.Text),
                     ValorResidual = double.Parse(txtValorR.Text),
-                    VidaUtil = int.Parse(txtVidaU.Text)
+                    VidaUtil = int.Parse(txtVidaU.Text),
+                    Descripcion = txtDescripcion.Text,
+                    Estado = estAct.ToString(),
+                    Codigo = Guid.NewGuid().ToString()
                 };
+                MessageBox.Show($"{activo.Codigo}");
                 aservices.Add(activo);
                 limpiar();
                 Dispose();
@@ -71,7 +78,7 @@ namespace practicaDepreciacion
         }
         private bool verificar()
         {
-            if (String.IsNullOrEmpty(txtNombre.Text) || String.IsNullOrEmpty(txtValor.Text) || String.IsNullOrEmpty(txtVidaU.Text) || String.IsNullOrEmpty(txtValorR.Text))
+            if (String.IsNullOrEmpty(txtNombre.Text) || String.IsNullOrEmpty(txtValor.Text) || String.IsNullOrEmpty(txtVidaU.Text) || String.IsNullOrEmpty(txtValorR.Text)|| String.IsNullOrEmpty(txtDescripcion.Text)||cmbEstado.SelectedIndex == -1)
             {
 
                 return false;
@@ -84,6 +91,8 @@ namespace practicaDepreciacion
             this.txtValor.Text = String.Empty;
             this.txtValorR.Text = String.Empty;
             this.txtVidaU.Text = String.Empty;
+            this.txtDescripcion.Text = String.Empty;
+            cmbEstado.SelectedIndex = -1;
         }
 
         private void txtValorR_KeyPress(object sender, KeyPressEventArgs e)
@@ -129,14 +138,18 @@ namespace practicaDepreciacion
             }
             else
             {
-
+                EstadoActivo estAct = (EstadoActivo)Enum.GetValues(typeof(EstadoActivo)).
+                    GetValue(cmbEstado.SelectedIndex);
                 Activo activo = new Activo()
                 {
                     Id = a.Id,
                     Nombre = txtNombre.Text,
                     Valor = double.Parse(txtValor.Text),
                     ValorResidual = double.Parse(txtValorR.Text),
-                    VidaUtil = int.Parse(txtVidaU.Text)
+                    VidaUtil = int.Parse(txtVidaU.Text),
+                    Descripcion = txtDescripcion.Text,
+                    Estado = estAct.ToString(),
+                    Codigo = a.Codigo
                 };
                 aservices.Update(activo);
                 limpiar();
@@ -144,6 +157,11 @@ namespace practicaDepreciacion
 
 
             }
+        }
+
+        private void Nombre_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -11,6 +11,16 @@ namespace Infraestructure.Repository
 {
     public class ListActivoRepository : BaseRepositoy<Activo>, IActivoModel
     {
+        public void AsignarActivo(Activo a, Empleado e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Activo> GetActivoByEmpleado(Empleado e)
+        {
+            throw new NotImplementedException();
+        }
+
         public Activo GetById(int id)
         {
             return data.Where(x => x.Id == id).FirstOrDefault();

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Infraestructure.Repository
 {
-    public class BinaryEmpleadoRepository:IEmpleadoModel;
+    public class BinaryEmpleadoRepository:IEmpleadoModel
     {
         public RAFContext context;
         public const int SIZE = 568;
@@ -18,7 +18,7 @@ namespace Infraestructure.Repository
         }
        
 
-        Empleado IEmpleadoModel.GetById(int id)
+        public Empleado GetById(int id)
         {
             return context.Get<Empleado>(id);
         }
