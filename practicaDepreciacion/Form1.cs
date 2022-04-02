@@ -16,10 +16,12 @@ namespace practicaDepreciacion
     public partial class Form1 : Form
     {
         IActivoServices activoServices;
+        IEmpleadoServices empleadoServices;
         int index;
-        public Form1(IActivoServices ActivoServices)
+        public Form1(IActivoServices ActivoServices, IEmpleadoServices EmpleadoServices)
         {
             this.activoServices = ActivoServices;
+            this.empleadoServices = EmpleadoServices;
             InitializeComponent();
         }
 
@@ -39,37 +41,7 @@ namespace practicaDepreciacion
 
     
 
-        private void txtValor_KeyPress_1(object sender, KeyPressEventArgs e)
-        {
-            if (Char.IsLetter(e.KeyChar))
-            {
-                e.Handled = true;
-                MessageBox.Show("No se puede LETRAS");
-            }
-        }
-
-        private void txtValorR_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (Char.IsLetter(e.KeyChar))
-            {
-                e.Handled = true;
-                MessageBox.Show("No se puede LETRAS");
-            }
-        }
-
-        private void txtVidaU_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (Char.IsLetter(e.KeyChar))
-            {
-                e.Handled = true;
-                MessageBox.Show("No se puede LETRAS");
-            }
-        }
-
-        private void txtEnviar_Click(object sender, EventArgs e)
-        {
-           
-        }
+    
        
         
 

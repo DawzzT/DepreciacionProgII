@@ -11,7 +11,7 @@ namespace Infraestructure.Repository
     public class BinaryActivoRepository : IActivoModel
     {
         public RAFContext context;
-        public const int SIZE = 119;
+        public const int SIZE = 346;
         public BinaryActivoRepository()
         {
             context = new RAFContext("activo", SIZE);
@@ -62,6 +62,16 @@ namespace Infraestructure.Repository
         public void Update(Activo activo)
         {
             context.Update<Activo>(activo);
+        }
+
+        public void AsignarActivo(Activo a, Empleado e)
+        {
+            context.Update<Activo>(a);
+        }
+
+        public List<Activo> GetActivoByEmpleado(Empleado e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

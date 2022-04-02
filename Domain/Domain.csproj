@@ -42,9 +42,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Activo.cs" />
+    <Compile Include="Entities\Empleado.cs" />
     <Compile Include="Enum\Depreciacion.cs" />
+    <Compile Include="Enum\EstadoActivo.cs" />
+    <Compile Include="Enum\EstadoEmpleado.cs" />
     <Compile Include="Interfaces\IActivoModel.cs" />
     <Compile Include="Interfaces\IDepreciacionModel.cs" />
+    <Compile Include="Interfaces\IEmpleadoModel.cs" />
     <Compile Include="Interfaces\IModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -329,7 +329,8 @@ namespace Infraestructure.Repository
         public void Update<T>(T t)
         {
             int Id = int.Parse(t.GetType().GetProperty("Id").GetValue(t).ToString());
-
+            int posh = 0;
+            int posIndex = 0;
             using (BinaryReader brHeader = new BinaryReader(HeaderStream),
                                 brData = new BinaryReader(DataStream))
             {
@@ -344,7 +345,17 @@ namespace Infraestructure.Repository
                 n = brHeader.ReadInt32();
                 k = brHeader.ReadInt32();
 
-                long posh = 8 + (Id - 1) * 4;
+                for (int i = 0; i < n; i++)
+                {
+                    posh = 8 + i * 4;
+                    brHeader.BaseStream.Seek(posh, SeekOrigin.Begin);
+                    if (Id == brHeader.ReadInt32())
+                    {
+                        posIndex = (int)posh;
+
+                    }
+
+                }
                 brHeader.BaseStream.Seek(posh, SeekOrigin.Begin);
                 long index = brHeader.ReadInt32();
                 long posd = (index - 1) * size;
