@@ -66,9 +66,11 @@ namespace practicaDepreciacion
                     VidaUtil = int.Parse(txtVidaU.Text),
                     Descripcion = txtDescripcion.Text,
                     Estado = estAct.ToString(),
-                    Codigo = Guid.NewGuid().ToString()
+                    Codigo = Guid.NewGuid().ToString(),
+                    Empleado = 0
+
                 };
-                MessageBox.Show($"{activo.Codigo}");
+                //MessageBox.Show($"{activo.Codigo}");
                 aservices.Add(activo);
                 limpiar();
                 Dispose();
@@ -149,7 +151,8 @@ namespace practicaDepreciacion
                     VidaUtil = int.Parse(txtVidaU.Text),
                     Descripcion = txtDescripcion.Text,
                     Estado = estAct.ToString(),
-                    Codigo = a.Codigo
+                    Codigo = a.Codigo,
+                    Empleado = a.Empleado
                 };
                 aservices.Update(activo);
                 limpiar();

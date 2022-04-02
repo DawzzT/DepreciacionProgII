@@ -88,7 +88,7 @@ namespace practicaDepreciacion
         private void modificarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int index = dataGridView1.CurrentCell.RowIndex;
-
+            
             if (index >= 0)
             {
                 FrmActivo modificar = new FrmActivo(index);
@@ -110,6 +110,32 @@ namespace practicaDepreciacion
                 depreciacion.ShowDialog();
             }
             
+        }
+
+        private void nuevoEmpleadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            index = -1;
+            FrmEmpleado nuevo = new FrmEmpleado(index);
+            nuevo.eservices = empleadoServices;
+            nuevo.ShowDialog();
+
+            dataGridView1.DataSource = null;
+
+            dataGridView1.DataSource = empleadoServices.Read();
+        }
+
+        private void mostrarEmpleadosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = null;
+
+            dataGridView1.DataSource = empleadoServices.Read();
+        }
+
+        private void mostrarActivosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = null;
+
+            dataGridView1.DataSource = activoServices.Read();
         }
     }
 }

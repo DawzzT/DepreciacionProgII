@@ -11,21 +11,20 @@ namespace Infraestructure.Repository
     public class BinaryEmpleadoRepository:IEmpleadoModel
     {
         public RAFContext context;
-        public const int SIZE = 568;
+        public const int SIZE = 600;
         public BinaryEmpleadoRepository()
         {
-            context = new RAFContext("Empleado", SIZE);
+            context = new RAFContext("empleado", SIZE);
         }
-       
 
         public Empleado GetById(int id)
         {
-            return context.Get<Empleado>(id);
+            throw new NotImplementedException();
         }
 
         public void Update(Empleado empleado)
         {
-            context.Update<Empleado>(empleado);
+            throw new NotImplementedException();
         }
 
         public void Add(Empleado t)
@@ -35,10 +34,10 @@ namespace Infraestructure.Repository
 
         public void Delete(Empleado t)
         {
-            context.Delete(t.IdEmpleado);
+            throw new NotImplementedException();
         }
 
-        List<Empleado> IModel<Empleado>.Read()
+        public List<Empleado> Read()
         {
             return context.GetAll<Empleado>();
         }

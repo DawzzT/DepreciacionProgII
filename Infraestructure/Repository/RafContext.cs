@@ -260,10 +260,7 @@ namespace Infraestructure.Repository
                         long posh = 8 + i * 4;
                         brHeader.BaseStream.Seek(posh, SeekOrigin.Begin);
                         index = brHeader.ReadInt32();
-                        if (index == 0)
-                        {
-                            continue;
-                        }
+                        
                     }
 
                     T t = Get<T>(index);
@@ -482,6 +479,8 @@ namespace Infraestructure.Repository
             
             File.Delete("Temp.hd");
         }
+
+        
      
     }
 }

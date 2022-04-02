@@ -57,7 +57,7 @@ namespace practicaDepreciacion
                    GetValue(cmbEstado.SelectedIndex);
                 Empleado empleado = new Empleado()
                 {
-                    IdEmpleado = emp.IdEmpleado,
+                    Id = emp.Id,
                     Nombre = txtNombre.Text,
                     Apellidos = txtApellido.Text,
                     Cedula = txtCedula.Text,
@@ -77,32 +77,7 @@ namespace practicaDepreciacion
 
         private void btnEnviar_Click(object sender, EventArgs e)
         {
-            bool verificado = verificar();
-            if (verificado == false)
-            {
-                MessageBox.Show("Tienes que llenar todos los formularios.");
-            }
-            else
-            {
-                EstadoEmpleado estEmp = (EstadoEmpleado)Enum.GetValues(typeof(EstadoEmpleado)).
-                   GetValue(cmbEstado.SelectedIndex);
-                Empleado empleado = new Empleado()
-                {
-                    Nombre = txtNombre.Text,
-                    Apellidos = txtApellido.Text,
-                    Cedula = txtCedula.Text,
-                    Direccion = txtDireccion.Text,
-                    Email = txtEmail.Text,
-                    Telefono = txtTelefono.Text,
-                    Estado = estEmp.ToString()
-                    
-                };
-                
-                eservices.Add(empleado);
-                limpiar();
-                Dispose();
-
-            }
+           
         }
 
         private bool verificar()
@@ -126,5 +101,39 @@ namespace practicaDepreciacion
             cmbEstado.SelectedIndex = -1;
         }
 
+        private void FrmEmpleado_Load(object sender, EventArgs e)
+        {
+            IndexVerification();
+        }
+
+        private void btnEnviar_Click_1(object sender, EventArgs e)
+        {
+            bool verificado = verificar();
+            if (verificado == false)
+            {
+                MessageBox.Show("Tienes que llenar todos los formularios.");
+            }
+            else
+            {
+                EstadoEmpleado estEmp = (EstadoEmpleado)Enum.GetValues(typeof(EstadoEmpleado)).
+                   GetValue(cmbEstado.SelectedIndex);
+                Empleado empleado = new Empleado()
+                {
+                    Nombre = txtNombre.Text,
+                    Apellidos = txtApellido.Text,
+                    Cedula = txtCedula.Text,
+                    Direccion = txtDireccion.Text,
+                    Email = txtEmail.Text,
+                    Telefono = txtTelefono.Text,
+                    Estado = estEmp.ToString()
+
+                };
+                MessageBox.Show($"{empleado.Nombre}, {empleado.Apellidos},{empleado.Cedula},{empleado.Direccion},{empleado.Email},{empleado.Telefono}, {empleado.Estado}" );
+                eservices.Add(empleado);
+                limpiar();
+                Dispose();
+
+            }
+        }
     }
 }

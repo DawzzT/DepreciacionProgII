@@ -49,17 +49,17 @@ namespace practicaDepreciacion
             // 
             // btnEnviar
             // 
-            this.btnEnviar.Location = new System.Drawing.Point(95, 305);
+            this.btnEnviar.Location = new System.Drawing.Point(144, 305);
             this.btnEnviar.Name = "btnEnviar";
             this.btnEnviar.Size = new System.Drawing.Size(75, 23);
             this.btnEnviar.TabIndex = 0;
             this.btnEnviar.Text = "Enviar";
             this.btnEnviar.UseVisualStyleBackColor = true;
-           
+            this.btnEnviar.Click += new System.EventHandler(this.btnEnviar_Click_1);
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(95, 305);
+            this.btnModificar.Location = new System.Drawing.Point(32, 292);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
             this.btnModificar.TabIndex = 1;
@@ -210,6 +210,7 @@ namespace practicaDepreciacion
             this.Controls.Add(this.btnEnviar);
             this.Name = "FrmEmpleado";
             this.Text = "FrmEmpleado";
+            this.Load += new System.EventHandler(this.FrmEmpleado_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

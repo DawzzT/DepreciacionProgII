@@ -66,12 +66,22 @@ namespace Infraestructure.Repository
 
         public void AsignarActivo(Activo a, Empleado e)
         {
+            a.Empleado = e.Id;
             context.Update<Activo>(a);
         }
 
         public List<Activo> GetActivoByEmpleado(Empleado e)
         {
-            throw new NotImplementedException();
+            List<Activo> a = new List<Activo>();
+           
+            foreach(Activo activo in Read())
+            {
+                if(activo.Empleado == e.Id)
+                {
+                    a.Add(activo);
+                }
+            }
+            return a;
         }
     }
 }
