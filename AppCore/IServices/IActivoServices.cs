@@ -12,5 +12,8 @@ namespace AppCore.IServices
         Activo GetById(int id);
 
         void Update(Activo activo);
+
+        void AsignarActivo(Activo a, Empleado e);
+        List<Activo> GetActivoByEmpleado(Empleado e);
     }
 }

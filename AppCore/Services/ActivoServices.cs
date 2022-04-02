@@ -18,6 +18,16 @@ namespace AppCore.Services
             this.activoModel = model;
         }
 
+        public void AsignarActivo(Activo a, Empleado e)
+        {
+            activoModel.AsignarActivo(a, e);
+        }
+
+        public List<Activo> GetActivoByEmpleado(Empleado e)
+        {
+            return activoModel.GetActivoByEmpleado(e);
+        }
+
         public Activo GetById(int id)
         {
             return activoModel.GetById(id);

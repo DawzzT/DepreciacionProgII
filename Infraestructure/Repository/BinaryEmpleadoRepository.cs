@@ -19,12 +19,12 @@ namespace Infraestructure.Repository
 
         public Empleado GetById(int id)
         {
-            throw new NotImplementedException();
+            return context.Get<Empleado>(id);
         }
 
         public void Update(Empleado empleado)
         {
-            throw new NotImplementedException();
+            context.Update<Empleado>(empleado);
         }
 
         public void Add(Empleado t)
@@ -34,7 +34,7 @@ namespace Infraestructure.Repository
 
         public void Delete(Empleado t)
         {
-            throw new NotImplementedException();
+            context.Delete(t.Id);
         }
 
         public List<Empleado> Read()

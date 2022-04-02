@@ -20,12 +20,12 @@ namespace AppCore.Services
 
         public void Update(Empleado empleado)
         {
-            throw new NotImplementedException();
+            empleadoModel.Update(empleado);
         }
 
-        Empleado IEmpleadoServices.GetById(int id)
+        public Empleado GetById(int id)
         {
-            throw new NotImplementedException();
+            return empleadoModel.GetById(id);
         }
     }
 }

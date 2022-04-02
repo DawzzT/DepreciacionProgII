@@ -49,7 +49,7 @@ namespace practicaDepreciacion
             // 
             // btnEnviar
             // 
-            this.btnEnviar.Location = new System.Drawing.Point(144, 305);
+            this.btnEnviar.Location = new System.Drawing.Point(85, 305);
             this.btnEnviar.Name = "btnEnviar";
             this.btnEnviar.Size = new System.Drawing.Size(75, 23);
             this.btnEnviar.TabIndex = 0;
@@ -59,7 +59,7 @@ namespace practicaDepreciacion
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(32, 292);
+            this.btnModificar.Location = new System.Drawing.Point(85, 305);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
             this.btnModificar.TabIndex = 1;
