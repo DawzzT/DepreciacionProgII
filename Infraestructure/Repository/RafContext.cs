@@ -160,7 +160,7 @@ namespace Infraestructure.Repository
                             if (id == brHeader.ReadInt32())
                             {
                                 posindex = (int)posh;
-
+                                break;
                             }
 
                     }
@@ -349,7 +349,7 @@ namespace Infraestructure.Repository
                     if (Id == brHeader.ReadInt32())
                     {
                         posIndex = (int)posh;
-
+                        break;
                     }
 
                 }
@@ -441,7 +441,7 @@ namespace Infraestructure.Repository
                     if (id == brHeader.ReadInt32())
                     {
                         posindex = (int)posh;
-
+                        break;
                     }
 
                 }
